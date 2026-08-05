@@ -53,10 +53,6 @@ To remove the registered task:
 ```
 
 ## Project Structure
-
-```text
-## Project Structure
-
 ```text
 data/
 ├─ raw/          # Raw dataset files
