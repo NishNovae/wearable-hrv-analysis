@@ -1,0 +1,70 @@
+=== Hourly Activity ===
+(10064, 8)
+deviceId                       str
+date                datetime64[ms]
+hour                datetime64[ms]
+steps_sum                  float64
+steps_max_5min             float64
+sensor_intervals             int64
+steps_observed               int64
+steps_coverage             float64
+dtype: object
+  deviceId       date  ... steps_observed  steps_coverage
+0     ab60 2021-03-04  ...              0             0.0
+1     ab60 2021-03-04  ...              0             0.0
+2     ab60 2021-03-04  ...              0             0.0
+3     ab60 2021-03-04  ...              0             0.0
+4     ab60 2021-03-04  ...              0             0.0
+
+[5 rows x 8 columns]
+
+steps coverage
+count    10064.000000
+mean         0.339728
+std          0.379920
+min          0.000000
+25%          0.000000
+50%          0.200000
+75%          0.666667
+max          1.000000
+Name: steps_coverage, dtype: float64
+
+missing steps_sum
+4501
+
+=== Daily Activity ===
+(1328, 7)
+deviceId                       str
+date                datetime64[ms]
+steps_sum                  float64
+steps_max_5min             float64
+sensor_intervals             int64
+steps_observed               int64
+steps_coverage             float64
+dtype: object
+  deviceId       date  ...  steps_observed  steps_coverage
+0     ab60 2021-03-04  ...               0        0.000000
+1     ab60 2021-03-08  ...              19        0.633333
+2     ab60 2021-03-09  ...              11        0.305556
+3     ab60 2021-03-10  ...              20        0.689655
+4     ab60 2021-03-11  ...              39        0.650000
+
+[5 rows x 7 columns]
+
+steps coverage
+count    1328.000000
+mean        0.290467
+std         0.251660
+min         0.000000
+25%         0.055303
+50%         0.250000
+75%         0.482454
+max         1.000000
+Name: steps_coverage, dtype: float64
+
+missing steps_sum
+302
+
+=== Validation ===
+hourly coverage outside 0~1: 0
+daily coverage outside 0~1: 0

@@ -1,3 +1,5 @@
+# preprocess.py
+
 from pathlib import Path
 import pandas as pd
 from columns import SENSOR_COLUMNS, SLEEP_COLUMNS, SURVEY_COLUMNS
@@ -45,7 +47,28 @@ if DEBUG:
 sensor = sensor[sensor["datetime"].dt.year == 2021].copy()
 
 
+# === Save preprocessed datasets ===
 
+PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+sensor.to_parquet(
+    PROCESSED_DIR / "sensor_5min.parquet",
+    index=False
+)
+
+sleep.to_parquet(
+    PROCESSED_DIR / "sleep_diary.parquet",
+    index=False
+)
+
+survey.to_parquet(
+    PROCESSED_DIR / "survey.parquet",
+    index=False
+)
+
+print(f"sensor: \t{sensor.shape}")
+print(f"sleep: \t\t{sleep.shape}")
+print(f"survey: \t{survey.shape}")
+print(f"saved to: \t{PROCESSED_DIR}")
 
 
 

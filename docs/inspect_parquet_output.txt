@@ -1,0 +1,19 @@
+(38912, 9)
+deviceId                        str
+ts_start                      int64
+missingness_score           float64
+HR                          float64
+steps                       float64
+sdnn                        float64
+rmssd                       float64
+datetime             datetime64[ms]
+date                 datetime64[ms]
+dtype: object
+  deviceId       ts_start  ...                datetime       date
+0     ab60  1617262425031  ... 2021-04-01 07:33:45.031 2021-04-01
+1     ab60  1616736817151  ... 2021-03-26 05:33:37.151 2021-03-26
+2     ab60  1616736517083  ... 2021-03-26 05:28:37.083 2021-03-26
+3     ab60  1616736217077  ... 2021-03-26 05:23:37.077 2021-03-26
+4     ab60  1616734416800  ... 2021-03-26 04:53:36.800 2021-03-26
+
+[5 rows x 9 columns]
