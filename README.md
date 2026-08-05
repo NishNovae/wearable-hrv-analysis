@@ -11,25 +11,65 @@ A data analysis project using wearable sensor data, including HRV, activity, sle
 - Survey data for each participant
 - `userId` in the sleep diary corresponds to `deviceId` in the sensor and survey data
 
+## Week 1
+### Processing Overview
+The pipeline performs the following steps:
+
+  1. Inspect `sensor_hrv_filtered.csv`, `sleep_diary.csv`, and `survey.csv`
+  2. Select columns required for analysis
+  3. Convert timestamps and remove invalid records
+  4. Save processed datasets in `Parquet` format to `data/processed`
+  5. Aggregate activity data by hour and day
+  6. Generate inspection results for processed and aggregated datasets
+
+HR and HRV variables are preserved at the original 5-minute interval level. Activity variables are additionally aggregated into hourly and daily datasets.
+
+### Processing Pipeline
+#### Git Bash / Linux
+```bash
+./run_pipeline.sh
+```
+
+#### Windows PowerShell
+```bash
+.\run_pipeline.bat
+```
+
+Both scripts execute raw data inspection, preprocessing, Parquet conversion, activity aggregation, and validation.
+
+The Windows pipeline can also be registered with Task Scheduler:
+```bash
+.\register_task.bat
+```
+
+To run the registered task immediately:
+```bash
+schtasks /run /tn "Wearable HRV Pipeline"
+```
+
+To remove the registered task:
+```bash
+.\unregister_task.bat
+```
 
 ## Project Structure
 
 ```text
+## Project Structure
+
+```text
 data/
-├─ raw/
-└─ processed/
+├─ raw/          # Raw dataset files
+└─ processed/    # Processed Parquet files
 
-docs/
-└─ inspect_data_output.txt
+docs/            # Data inspection outputs
+src/             # Preprocessing and aggregation scripts
+output/          # Analysis outputs
 
-src/
-├─ columns.py
-├─ inspect_data.py
-└─ preprocess.py
-
-output/
 requirements.txt
 set_environment
+run_pipeline.sh
+run_pipeline.bat
+register_task.bat
+unregister_task.bat
 ```
-
-- `inspect_data.py` generates the initial data inspection results stored in `docs/inspect_data_output.txt`.
