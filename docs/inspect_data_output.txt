@@ -1,0 +1,193 @@
+
+============================================================
+sensor_hrv_filtered.csv
+shape: (38913, 28)
+
+columns:
+['deviceId', 'ts_start', 'ts_end', 'missingness_score', 'HR', 'ibi', 'acc_x_avg', 'acc_y_avg', 'acc_z_avg', 'grv_x_avg', 'grv_y_avg', 'grv_z_avg', 'grv_w_avg', 'gyr_x_avg', 'gyr_y_avg', 'gyr_z_avg', 'steps', 'distance', 'calories', 'light_avg', 'sdnn', 'sdsd', 'rmssd', 'pnn20', 'pnn50', 'lf', 'hf', 'lf/hf']
+
+dtypes:
+deviceId                 str
+ts_start               int64
+ts_end                 int64
+missingness_score    float64
+HR                   float64
+ibi                  float64
+acc_x_avg            float64
+acc_y_avg            float64
+acc_z_avg            float64
+grv_x_avg            float64
+grv_y_avg            float64
+grv_z_avg            float64
+grv_w_avg            float64
+gyr_x_avg            float64
+gyr_y_avg            float64
+gyr_z_avg            float64
+steps                float64
+distance             float64
+calories             float64
+light_avg            float64
+sdnn                 float64
+sdsd                 float64
+rmssd                float64
+pnn20                float64
+pnn50                float64
+lf                   float64
+hf                   float64
+lf/hf                float64
+dtype: object
+
+first rows:
+  deviceId       ts_start         ts_end  ...           lf           hf     lf/hf
+0     ab60  1617262425031  1617262724833  ...  1818.065625  1252.992443  1.450979
+1     ab60  1616736817151  1616737116986  ...  1918.499169  2784.393293  0.689019
+2     ab60  1616736517083  1616736816952  ...  1292.696555  1034.550027  1.249525
+3     ab60  1616736217077  1616736516883  ...  1561.785747   812.118619  1.923101
+4     ab60  1616734416800  1616734716672  ...  3460.217895  1886.157661  1.834533
+
+[5 rows x 28 columns]
+
+missing values:
+deviceId                 0
+ts_start                 0
+ts_end                   0
+missingness_score        0
+HR                       0
+ibi                      0
+acc_x_avg              305
+acc_y_avg              305
+acc_z_avg              305
+grv_x_avg               89
+grv_y_avg               89
+grv_z_avg               89
+grv_w_avg               89
+gyr_x_avg              149
+gyr_y_avg              149
+gyr_z_avg              149
+steps                25390
+distance             25390
+calories             25390
+light_avg              819
+sdnn                     0
+sdsd                     0
+rmssd                    0
+pnn20                    0
+pnn50                    0
+lf                       0
+hf                       0
+lf/hf                    0
+dtype: int64
+
+============================================================
+sleep_diary.csv
+shape: (1372, 11)
+
+columns:
+['userId', 'date', 'go2bed', 'asleep', 'wakeup', 'wakeup@night', 'waso', 'sleep_duration', 'in_bed_duration', 'sleep_latency', 'sleep_efficiency']
+
+dtypes:
+userId                  str
+date                    str
+go2bed                  str
+asleep                  str
+wakeup                  str
+wakeup@night          int64
+waso                float64
+sleep_duration      float64
+in_bed_duration     float64
+sleep_latency       float64
+sleep_efficiency    float64
+dtype: object
+
+first rows:
+  userId        date  ... sleep_latency sleep_efficiency
+0   pm96  2021-03-09  ...      1.000000         0.866667
+1   pm96  2021-03-10  ...      0.666667         0.914894
+2   pm96  2021-03-11  ...      0.500000         0.930233
+3   pm96  2021-03-12  ...      0.500000         0.931818
+4   pm96  2021-03-13  ...      0.500000         0.947368
+
+[5 rows x 11 columns]
+
+missing values:
+userId              0
+date                0
+go2bed              0
+asleep              0
+wakeup              0
+wakeup@night        0
+waso                6
+sleep_duration      0
+in_bed_duration     0
+sleep_latency       0
+sleep_efficiency    0
+dtype: int64
+
+============================================================
+survey.csv
+shape: (49, 23)
+
+columns:
+['deviceId', 'sex', 'age', 'marriage', 'occupation', 'smartwatch', 'regular', 'exercise', 'coffee', 'smoking', 'drinking', 'height', 'weight', 'ISI_1', 'PHQ9_1', 'GAD7_1', 'MEQ', 'ISI_2', 'PHQ9_2', 'GAD7_2', 'ISI_F', 'PHQ9_F', 'GAD7_F']
+
+dtypes:
+deviceId          str
+sex             int64
+age             int64
+marriage        int64
+occupation      int64
+smartwatch      int64
+regular         int64
+exercise        int64
+coffee          int64
+smoking         int64
+drinking        int64
+height        float64
+weight        float64
+ISI_1           int64
+PHQ9_1          int64
+GAD7_1          int64
+MEQ             int64
+ISI_2         float64
+PHQ9_2        float64
+GAD7_2        float64
+ISI_F         float64
+PHQ9_F        float64
+GAD7_F        float64
+dtype: object
+
+first rows:
+  deviceId  sex  age  marriage  ...  GAD7_2  ISI_F  PHQ9_F  GAD7_F
+0     pm96    1   36         1  ...     0.0    9.0     0.0     0.0
+1     vc10    2   31         1  ...     0.0    8.0     1.0     0.0
+2     pg18    2   38         1  ...     1.0   10.0     5.0     4.0
+3     nd56    2   40         3  ...     0.0    9.0     4.0     0.0
+4     vs14    2   28         1  ...    11.0   13.0    11.0     6.0
+
+[5 rows x 23 columns]
+
+missing values:
+deviceId       0
+sex            0
+age            0
+marriage       0
+occupation     0
+smartwatch     0
+regular        0
+exercise       0
+coffee         0
+smoking        0
+drinking       0
+height        10
+weight        11
+ISI_1          0
+PHQ9_1         0
+GAD7_1         0
+MEQ            0
+ISI_2          0
+PHQ9_2         0
+GAD7_2         0
+ISI_F          0
+PHQ9_F         0
+GAD7_F         0
+dtype: int64
