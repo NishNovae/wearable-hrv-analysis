@@ -29,4 +29,8 @@ python src/inspect_aggregation.py > docs/inspect_aggregation_output.txt
 
 echo "[INFO] Hourly and daily activity aggregation completed."
 echo
-echo "[INFO] Pipeline completed successfully. Processed data is in data/processed, inspection results are in docs."
+
+python src/export_to_csv.py
+
+echo
+echo "[INFO] Pipeline completed. Processed data is in data/processed, CSV exports are in data/export, inspection results are in docs."

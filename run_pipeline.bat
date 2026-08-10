@@ -32,4 +32,9 @@ if errorlevel 1 exit /b 1
 
 echo [INFO] Hourly and daily activity aggregation completed.
 echo.
-echo [INFO] Pipeline completed successfully. Processed data is in data/processed, inspection results are in docs.
+
+python src\export_to_csv.py
+if errorlevel 1 exit /b 1
+
+echo.
+echo [INFO] Pipeline completed. Processed data is in data/processed, CSV exports are in data/export, inspection results are in docs.
