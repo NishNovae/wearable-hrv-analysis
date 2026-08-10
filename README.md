@@ -57,6 +57,7 @@ To remove the registered task:
 data/
 ├─ raw/          # Raw dataset files
 └─ processed/    # Processed Parquet files
+└─ export/       # csv files to export into Google Spreadsheets
 
 docs/            # Data inspection outputs
 src/             # Preprocessing and aggregation scripts
