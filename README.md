@@ -3,8 +3,11 @@
 웨어러블 센서 기반 HRV, 활동량, 수면일지 데이터를 전처리하고 분석하는 프로젝트입니다.
 
 A data analysis project using wearable sensor data, including HRV, activity, sleep diaries, and participant surveys.
+<p align="left">
+  <img src="./assets/pipeline_overview.svg" width="900">
+</p>
 
-## Processing Pipeline
+## Tech Stack
 Data Source
 <br>
 <img src="https://img.shields.io/badge/Figshare-D94A4A?style=flat-square&logoColor=white"/>
