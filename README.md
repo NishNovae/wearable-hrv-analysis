@@ -4,24 +4,18 @@
 
 A data analysis project using wearable sensor data, including HRV, activity, sleep diaries, and participant surveys.
 
-> WILL POST OVERVIEW PIPELINE IMAGE HERE
-
-## Tech Stack
+## Processing Pipeline
 Data Source
 <br>
 <img src="https://img.shields.io/badge/Figshare-D94A4A?style=flat-square&logoColor=white"/>
 <br>
 Data Processing
 <br>
-<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
-<img src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white"/>
-<img src="https://img.shields.io/badge/CSV-2E8B57?style=flat-square&logoColor=white"/>
-<img src="https://img.shields.io/badge/Parquet-7C5C99?style=flat-square&logoColor=white"/>
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/><img src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white"/><img src="https://img.shields.io/badge/CSV-2E8B57?style=flat-square&logoColor=white"/><img src="https://img.shields.io/badge/Parquet-7C5C99?style=flat-square&logoColor=white"/>
 <br>
 Data Integration
 <br>
-<img src="https://img.shields.io/badge/Google%20Sheets-34A853?style=flat-square&logo=googlesheets&logoColor=white"/>
-<img src="https://img.shields.io/badge/BigQuery-4285F4?style=flat-square&logo=googlebigquery&logoColor=white"/>
+<img src="https://img.shields.io/badge/Google%20Sheets-34A853?style=flat-square&logo=googlesheets&logoColor=white"/><img src="https://img.shields.io/badge/BigQuery-4285F4?style=flat-square&logo=googlebigquery&logoColor=white"/>
 <br>
 Visualization
 <br>
