@@ -3,6 +3,7 @@
 웨어러블 센서 기반 HRV, 활동량, 수면일지 데이터를 전처리하고 분석하는 프로젝트입니다.
 
 A data analysis project using wearable sensor data, including HRV, activity, sleep diaries, and participant surveys.
+
 <p align="left">
   <img src="./assets/pipeline_overview.svg" width="900">
 </p>
@@ -16,6 +17,10 @@ Data Processing
 <br>
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/><img src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white"/><img src="https://img.shields.io/badge/CSV-2E8B57?style=flat-square&logoColor=white"/><img src="https://img.shields.io/badge/Parquet-7C5C99?style=flat-square&logoColor=white"/>
 <br>
+Machine Learning
+<br>
+<img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white"/>
+<br>
 Data Integration
 <br>
 <img src="https://img.shields.io/badge/Google%20Sheets-34A853?style=flat-square&logo=googlesheets&logoColor=white"/><img src="https://img.shields.io/badge/BigQuery-4285F4?style=flat-square&logo=googlebigquery&logoColor=white"/>
@@ -27,15 +32,17 @@ Visualization
 
 ## Dataset
 `Figshare - Springer Nature`:<br> [*In-situ wearable-based dataset of continuous heart rate variability monitoring accompanied by sleep diaries*](https://springernature.figshare.com/articles/dataset/In-situ_wearable-based_dataset_of_continuous_heart_rate_variability_monitoring_accompanied_by_sleep_diaries/28509740?file=52669388)
+
 ```text
 - 49 healthy adults
 - Wearable sensor data collected over approx. 4 weeks
 - Daily sleep diaries
 - Survey data for each participant
 - `userId` in the sleep diary corresponds to `deviceId` in the sensor and survey data
-```
+````
 
 ## Data Processing
+
 ```text
 1. Inspect `sensor_hrv_filtered.csv`, `sleep_diary.csv`, and `survey.csv`
 2. Select columns required for analysis
@@ -45,6 +52,7 @@ Visualization
 6. Export processed datasets to CSV for external data integration
 7. Generate inspection results for processed and aggregated datasets
 ```
+
 ```text
 HR and HRV variables are preserved at the original 5-minute interval level.
 Activity variables are additionally aggregated into hourly and daily datasets.
@@ -52,12 +60,15 @@ Exported CSV files are manually uploaded to Google Spreadsheets for downstream B
 ```
 
 ### How to run the processing pipeline
+
 #### Git Bash / Linux
+
 ```bash
 ./run_pipeline.sh
 ```
 
 #### Windows PowerShell
+
 ```bash
 .\run_pipeline.bat
 ```
@@ -65,29 +76,89 @@ Exported CSV files are manually uploaded to Google Spreadsheets for downstream B
 Both scripts execute raw data inspection, preprocessing, Parquet conversion, activity aggregation, and validation.
 
 The Windows pipeline can also be registered with Task Scheduler:
+
 ```bash
 .\register_task.bat
 ```
 
 To run the registered task immediately:
+
 ```bash
 schtasks /run /tn "Wearable HRV Pipeline"
 ```
 
 To remove the registered task:
+
 ```bash
 .\unregister_task.bat
 ```
 
+
+## Analysis Progress
+
+### Daily ML Dataset
+
+Sensor, activity, sleep diary, and survey data were integrated into a daily-level ML dataset.
+
+```text
+- 1,328 rows × 21 columns
+- HRV aggregated by participant and date
+- Activity and sleep diary joined by date
+- Survey variables joined at participant level
+````
+
+### Random Forest Regression
+
+Random Forest models were used to explore whether sleep, activity, and sensor variables could explain RMSSD variation.
+
+```text
+- Daily RMSSD prediction showed strong participant-level baseline effects
+- Test R² remained close to 0 after reducing overfitting
+- Within-participant centered analysis also showed limited explanatory power
+- Closely related HRV variables produced artificially strong predictions and were excluded
+```
+
+These results shifted the analysis focus from prediction accuracy toward interpretable physiological patterns.
+
+### K-Means Clustering
+
+K-Means clustering was applied to 5-minute sensor data using:
+
+```text
+HR
+acc_magnitude
+light_avg
+```
+
+After standardization, `k=3` produced the highest silhouette score (`0.3700`).
+
+The resulting clusters showed different heart-rate, acceleration, and light profiles. Although RMSSD and SDNN were not used to create the clusters, their distributions also differed between clusters.
+
+Participant-level checks showed that most participants appeared in multiple clusters, suggesting that the clusters may represent recurring sensor states rather than participant identity.
+
+### Next Steps
+
+```text
+- PCA visualization of K-Means clusters
+- SHAP / LIME for interpretable supervised analysis
+- Further validation of cluster characteristics
+```
+
 ## Project Structure
+
 ```text
 data/
 ├─ raw/          # Raw dataset files
 ├─ processed/    # Processed Parquet files
-└─ export/       # csv files to export into Google Spreadsheets
+├─ export/       # CSV files to export into Google Spreadsheets
+└─ ml/           # ML-ready datasets
 
 docs/            # Data inspection outputs
-src/             # Preprocessing and aggregation scripts
+
+src/
+├─ ml/           # Machine learning and clustering scripts
+└─ ...           # Preprocessing and aggregation scripts
+
 output/          # Analysis outputs
 
 requirements.txt
