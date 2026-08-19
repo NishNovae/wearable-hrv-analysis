@@ -152,7 +152,7 @@ PC2 explained variance: 32.86%
 Total explained variance: 69.71%
 ```
 
-The PCA projection preserved the overall three-cluster structure while also showing overlap between clusters, consistent with the moderate silhouette score.
+The PCA projection retained the overall three-cluster structure while also showing overlap between clusters, consistent with the moderate silhouette score.
 
 PCA loadings indicated that:
 
