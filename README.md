@@ -39,7 +39,7 @@ Visualization
 - Daily sleep diaries
 - Survey data for each participant
 - `userId` in the sleep diary corresponds to `deviceId` in the sensor and survey data
-````
+```
 
 ## Data Processing
 
@@ -93,10 +93,10 @@ To remove the registered task:
 .\unregister_task.bat
 ```
 
-
-## Analysis Progress
+## Analysis
 
 ### Daily ML Dataset
+- `src/ml/prepare_ml_data.py`
 
 Sensor, activity, sleep diary, and survey data were integrated into a daily-level ML dataset.
 
@@ -105,9 +105,10 @@ Sensor, activity, sleep diary, and survey data were integrated into a daily-leve
 - HRV aggregated by participant and date
 - Activity and sleep diary joined by date
 - Survey variables joined at participant level
-````
+```
 
 ### Random Forest Regression
+- `src/ml/random_forest.py`, `src/ml/random_forest_5min.py`
 
 Random Forest models were used to explore whether sleep, activity, and sensor variables could explain RMSSD variation.
 
@@ -115,12 +116,13 @@ Random Forest models were used to explore whether sleep, activity, and sensor va
 - Daily RMSSD prediction showed strong participant-level baseline effects
 - Test R² remained close to 0 after reducing overfitting
 - Within-participant centered analysis also showed limited explanatory power
-- Closely related HRV variables produced artificially strong predictions and were excluded
+- Closely related HRV variables produced very strong predictions but added limited explanatory value
 ```
 
-These results shifted the analysis focus from prediction accuracy toward interpretable physiological patterns.
+These results shifted the analysis focus from prediction accuracy toward exploratory analysis of physiological and sensor-state patterns.
 
 ### K-Means Clustering
+- `src/ml/k_means.py`, `src/ml/k_means_final.py`
 
 K-Means clustering was applied to 5-minute sensor data using:
 
@@ -132,16 +134,37 @@ light_avg
 
 After standardization, `k=3` produced the highest silhouette score (`0.3700`).
 
-The resulting clusters showed different heart-rate, acceleration, and light profiles. Although RMSSD and SDNN were not used to create the clusters, their distributions also differed between clusters.
+The resulting clusters showed different heart-rate, acceleration, and light profiles. Although RMSSD and SDNN were not used to create the clusters, their values also differed across clusters.
 
-Participant-level checks showed that most participants appeared in multiple clusters, suggesting that the clusters may represent recurring sensor states rather than participant identity.
+Participant-level checks showed that most participants appeared in multiple clusters, suggesting that the clusters may represent recurring sensor states rather than simply separating individual participants.
 
-### Next Steps
+### PCA Visualization
+
+PCA was applied to visualize the three-dimensional clustering feature space in two dimensions.
 
 ```text
-- PCA visualization of K-Means clusters
-- SHAP / LIME for interpretable supervised analysis
-- Further validation of cluster characteristics
+PC1 explained variance: 36.85%
+PC2 explained variance: 32.86%
+Total explained variance: 69.71%
+```
+
+The PCA projection preserved the overall three-cluster structure while also showing overlap between clusters, consistent with the moderate silhouette score.
+
+PCA loadings indicated that:
+
+```text
+- PC1 was primarily associated with higher HR and light, and lower acceleration magnitude
+- PC2 was primarily associated with acceleration magnitude and light
+```
+
+## Analysis Summary
+
+```text
+- Daily sleep and activity variables had limited explanatory power for RMSSD across participants
+- Participant-specific HRV baselines strongly affected regression performance
+- Closely related HRV variables could produce high predictive performance without providing meaningful new relationships
+- K-Means identified three recurring sensor-state clusters without directly using RMSSD or SDNN
+- PCA preserved approximately 69.7% of the clustering feature variance in two dimensions
 ```
 
 ## Project Structure
