@@ -140,6 +140,10 @@ Participant-level checks showed that most participants appeared in multiple clus
 
 ### PCA Visualization
 
+<p align="left">
+  <img src="./assets/pca_result.png" width="500">
+</p>
+
 PCA was applied to visualize the three-dimensional clustering feature space in two dimensions.
 
 ```text
