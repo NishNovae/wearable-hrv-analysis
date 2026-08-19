@@ -7,6 +7,9 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score
 
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+
 DEBUG = True
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -62,7 +65,7 @@ cluster_data = sensor_5min[
     + PROFILE_FEATURES
 ].dropna().copy()
 
-if DEBUG:
+'''if DEBUG:
     print("=== Input data ===")
     print(f"shape: {cluster_data.shape}")
 
@@ -72,7 +75,7 @@ if DEBUG:
             CLUSTER_FEATURES
         ].describe()
     )
-
+'''
 
 # === Scaling
 
@@ -84,7 +87,7 @@ X_scaled = scaler.fit_transform(
 
 
 # === Compare k
-
+'''
 scores = {}
 
 print("\n=== Silhouette scores ===")
@@ -124,7 +127,9 @@ print(
     f"\nBest k: {BEST_K} "
     f"(silhouette={scores[BEST_K]:.4f})"
 )
+'''
 
+BEST_K = 3
 
 # === Final K-Means model
 
@@ -193,7 +198,7 @@ print(cluster_profile)
 
 
 # === Cluster distribution by participant
-
+'''
 participant_cluster_ratio = pd.crosstab(
     cluster_data["deviceId"],
     cluster_data["cluster"],
@@ -214,9 +219,9 @@ print(
     participant_cluster_ratio.describe()
 )
 
-
+'''
 # === Cluster distribution by hour
-
+'''
 hour_cluster_ratio = pd.crosstab(
     cluster_data["hour"],
     cluster_data["cluster"],
@@ -245,3 +250,83 @@ print(
 )
 
 print(hour_counts)
+'''
+
+# === PCA
+
+pca = PCA(
+    n_components=2,
+    random_state=42,
+)
+
+X_pca = pca.fit_transform(
+    X_scaled
+)
+
+cluster_data["pc1"] = X_pca[:, 0]
+cluster_data["pc2"] = X_pca[:, 1]
+
+print(
+    "\n=== PCA explained variance ratio ==="
+)
+
+print(
+    pca.explained_variance_ratio_
+)
+
+
+# === PCA visualization
+
+plt.figure(
+    figsize=(8, 6)
+)
+
+for cluster_id in sorted(
+    cluster_data["cluster"].unique()
+):
+    subset = cluster_data[
+        cluster_data["cluster"]
+        == cluster_id
+    ]
+
+    plt.scatter(
+        subset["pc1"],
+        subset["pc2"],
+        s=8,
+        alpha=0.3,
+        label=f"Cluster {cluster_id}",
+    )
+
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title(
+    "K-Means Clusters in PCA Space"
+)
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+loadings = pd.DataFrame(
+    pca.components_.T,
+    index=CLUSTER_FEATURES,
+    columns=["PC1", "PC2"],
+)
+
+print("\n=== PCA loadings ===")
+print(loadings)
+
+print("\n=== PCA explained variance ===")
+print(
+    pca.explained_variance_ratio_,
+    pca.explained_variance_ratio_.sum(),
+)
+
+loadings = pd.DataFrame(
+    pca.components_.T,
+    index=CLUSTER_FEATURES,
+    columns=["PC1", "PC2"],
+)
+
+print("\n=== PCA loadings ===")
+print(loadings)
